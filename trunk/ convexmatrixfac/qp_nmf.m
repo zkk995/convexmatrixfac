@@ -1,6 +1,6 @@
 function [U,Y,err] = qp_nmf(X,r,options)
-% convex matrix factorization
-% [U,Y,e_train,e_test,iter] = qp_nmf(X,r,options)
+% nonnegative matrix factorization
+% [U,Y,err] = qp_nmf(X,r,options)
 % min |X - U'Y| s.t. U>=0, Y>=0
 % [tol,maxiter,U,Y,display]=getoption(options);
 etol=1e-4*r;

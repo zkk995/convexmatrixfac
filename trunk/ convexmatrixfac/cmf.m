@@ -1,8 +1,8 @@
 function [U,Y,err] = cmf(X,r,options)
 % convex matrix factorization
-% [U,Y,e_train,e_test,iter] = cmf(X,r,options)
+% [U,Y,err] = cmf(X,r,options)
 % min |X - U'Y| s.t. U>=0, Y>=0 and y'e=1;
-% [tol,maxiter,U,Y,display]=getoption(options);
+% [tol,maxiter,U,Y,display] = getoption(options);
 
 etol=1e-4*r;
 if ~exist('options','var'),options=struct;end;
