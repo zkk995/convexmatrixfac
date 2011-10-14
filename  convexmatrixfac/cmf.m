@@ -1,4 +1,4 @@
-function [U,Y,err] = cmf(X,r,options)
+function [U,Y,err] = cmf(X,lambda,r,options)
 % convex matrix factorization
 % [U,Y,err] = cmf(X,r,options)
 % min |X - U'Y| s.t. U>=0, Y>=0 and y'e=1;
@@ -16,9 +16,9 @@ for iter =1:maxiter
     [Y,tab] = qpmex(A+eye(size(A))*ss,b+Y*ss,2); % convex
     
     A = Y*Y';b= (X*Y')';%b= Y*Xt;
-    d=svd(A);ss=0;
+    d=svd(A);d=d+lambda;ss=0;
     if d(end)/d(1)<etol,ss=d(1)*etol;end
-    [U,tab] = qpmex(A+eye(size(A))*ss,b,1); % nonnegative
+    [U,tab] = qpmex(A+eye(size(A))*(ss+lambda),b,1); % nonnegative
 
     obj_=obj;
     obj=CalculateObj(U, Y);err(iter)=obj;
