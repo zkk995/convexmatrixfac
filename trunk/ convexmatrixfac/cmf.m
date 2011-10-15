@@ -18,7 +18,7 @@ for iter =1:maxiter
     A = Y*Y';b= (X*Y')';%b= Y*Xt;
     d=svd(A);d=d+lambda;ss=0;
     if d(end)/d(1)<etol,ss=d(1)*etol;end
-    [U,tab] = qpmex(A+eye(size(A))*(ss+lambda),b,1); % nonnegative
+    [U,tab] = qpmex(A+eye(size(A))*(ss+lambda),b+U*ss,1); % nonnegative
 
     obj_=obj;
     obj=CalculateObj(U, Y);err(iter)=obj;
