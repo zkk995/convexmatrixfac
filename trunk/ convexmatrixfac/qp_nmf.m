@@ -13,7 +13,7 @@ for iter =1:maxiter
     A = U*U'; b=U*X;
     d=svd(A);ss=0;
     if d(end)/d(1)<etol,ss=d(1)*etol;end
-    [Y,tab] = qpmex(A+eye(size(A))*ss,b+Y*ss,1); % 
+    [Y,tab] = qpmex(A+eye(size(A))*ss,b+Y*ss,1); %
     
     A = Y*Y';b= (X*Y')';%b= Y*Xt;
     d=svd(A);ss=0;
@@ -25,6 +25,8 @@ for iter =1:maxiter
     if display,
         fprintf('iter: %d obj:%6.4e \n',iter,obj);
     end
+    % normlize
+    U = U*diag(1./max(eps,max(U)));
     if abs(obj_-obj)<tol*obj,break;end
 end % end of main
 err=err(1:iter);
@@ -36,13 +38,13 @@ err=err(1:iter);
         maxiter = 20;
         tol = 1e-4;
         display = 1;
-
+        
         [m,n]=size(X);
         if isfield(options,'tol'),tol = options.tol;end
         if isfield(options,'maxiter'),maxiter = options.maxiter;end
         if isfield(options,'U'),U = options.U;else U=ones(r,m)+eye(r,m);end
         if isfield(options,'Y'),Y = options.Y;else Y=zeros(r,n);end
         if isfield(options,'display'),display=options.display;end
-
+        
     end
 end
