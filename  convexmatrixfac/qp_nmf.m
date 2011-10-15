@@ -26,7 +26,7 @@ for iter =1:maxiter
         fprintf('iter: %d obj:%6.4e \n',iter,obj);
     end
     % normlize
-    U = U*diag(1./max(eps,max(U)));
+    U = diag(1./max(eps,max(U,[],2)))*U;
     if abs(obj_-obj)<tol*obj,break;end
 end % end of main
 err=err(1:iter);
