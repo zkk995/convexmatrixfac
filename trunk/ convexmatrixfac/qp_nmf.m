@@ -25,11 +25,12 @@ for iter =1:maxiter
     if display,
         fprintf('iter: %d obj:%6.4e \n',iter,obj);
     end
-    % normlize
-    U = diag(1./max(eps,max(U,[],2)))*U;
     if abs(obj_-obj)<tol*obj,break;end
 end % end of main
 err=err(1:iter);
+% normlize
+U = diag(1./max(eps,max(U,[],2)))*U;
+Y = diag(max(eps,max(U,[],2)))*Y;
 
     function obj = CalculateObj(U, Y)
         obj = (nrm2+sum(sum((U*U').*(Y*Y'))))/2- sum(sum(Y.*(U*X)));
