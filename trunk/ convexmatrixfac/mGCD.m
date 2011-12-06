@@ -43,3 +43,11 @@ flop = flop + flopadd;
 H = H + Hnew;
 return
 
+function f = FlopMul(A,B)
+
+if issparse(A)
+    f = nnz(A)*size(B,2)*2;
+else
+    f = size(A,1)*size(A,2)*size(B,2)*2;
+end
+return
