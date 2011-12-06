@@ -34,7 +34,7 @@ typedef struct{
 	int pid;
 } myarg;
 
-#include<malloc.h>
+#include<stdlib.h>
 
 void mmalloc(int r){
 	int i;
